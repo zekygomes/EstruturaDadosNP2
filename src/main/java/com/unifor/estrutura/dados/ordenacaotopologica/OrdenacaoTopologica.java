@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Stack;
 import java.util.stream.Stream;
@@ -60,22 +61,22 @@ public class OrdenacaoTopologica {
 		// recebe o arquivo via argumentos ou ler o arquivo padrão da sua pasta
 		InputStream input = args.length > 0 ? new FileInputStream(args[0])
 				: OrdenacaoTopologica.class.getResourceAsStream("entrada.in");
-		processa(new java.io.InputStreamReader(input));
+		//processa(new java.io.InputStreamReader(input));
 		System.exit(0);
 	}
 
 	/**
 	 * Método principal
-	 */
+	 
 	private static void processa(Reader readerInput) {
 		entrada(readerInput);
 		ordena();
 		saida();
-	}
+	}*/
 
 	/**
 	 * Processa a entrada
-	 */
+	
 	private static void entrada(Reader readerInput) {
 		try (BufferedReader br = new BufferedReader(readerInput)) {
 			Stream<String> linhas = br.lines();
@@ -88,44 +89,56 @@ public class OrdenacaoTopologica {
 			e.printStackTrace();
 		}
 	}
-
+	 */
 	/**
 	 * Método que realiza a ordenação topológica.
 	 */
-	private static void ordena(List<Tarefa> tarefas) {
-		Stack<Integer> resultado = new Stack<Integer>();
-		for(Tarefa tarefa : tarefas){
-			if(isQtdDependeciasZero(tarefa.qtdDependencias)){
-				resultado.push(tarefa.valor);
-				tarefas.remove(tarefa);
-				for(int i = 0; i < tarefas.size(); i++){
-					int dependencia = resultado.pop();
-					int qtdDependencia = tarefas.get(i).qtdDependencias;
-					List<Integer> lista = tarefas.get(i).listaDependencias;
-					apagarDependencia(qtdDependencia, lista, dependencia);
-				}
-				
-				
+	private static void ordena(Tarefa tarefa) {
+		Queue<Integer> fila = null;
+		List<Integer> resultado = new ArrayList<Integer>();
+		
+		for(Map.Entry<Integer,No> no : tarefa.tarefas.entrySet()){
+			//verficia se não há dependencias
+			if(isDependeciasEmpty(no.getValue().qtdDependencias)){
+				//Adiciona o valor na fila
+				fila.add(no.getValue().valor);
+				//Verficar os sucessores para decrementar dependências e apagar da lista, se houver
+				decrementarDependenciasEapagarDaLista(no.getValue().valor, tarefa);
+				resultado.add(fila.poll());
 			}
 		}
-		
-		
+	}
+			
+	
+	private static void decrementarDependenciasEapagarDaLista(int valor, Tarefa tarefa){
+			//intera cada no da tarefa
+			for(Map.Entry<Integer,No> no : tarefa.tarefas.entrySet()){
+				//intera cada valor da Lista de Dependencias de cada no
+				for(Integer inter : no.getValue().listaDependentes){
+					//Verfica se a dependencia é igual ao valor passado
+					if(inter.equals(valor));
+					//Se for, é preciso decrementar a dependencia Dela 
+					tarefa.tarefas.get(valor).qtdDependencias--;
+					//e apagar da lista de dependencias
+					no.getValue().listaDependentes.remove(valor);
+				}
+			}
 	}
 	
-	private static boolean isQtdDependeciasZero(int qtdDependencias){
+	private static boolean isDependeciasEmpty(int qtdDependencias){
 		
 		return qtdDependencias==0;
 	}
 	
-	private static void apagarDependencia(int qtdDependencia, List <Integer> listas, int dependencia ){
-		for(Integer lista: listas){
-			if(lista == dependencia){
-				listas.remove(lista);
-				dependencia--;
-			}
-		}
-		
-	}
+	//private static void apagarDependencia(int qtdDependencia, List <Integer> listas, int dependencia ){
+	//		for(Integer lista: listas){
+	//			if(lista == dependencia){
+	//			listas.remove(lista);
+	//			dependencia--;
+	//		}
+	//	}
+	//	
+	//}
 
 
 	/**
@@ -143,13 +156,6 @@ public class OrdenacaoTopologica {
 		 catch (IOException e) {
 			System.out.println("deu erro");
 		}
-	}
-	
-	public class Tarefa{
-		int valor;
-		int qtdDependencias;
-		List <Integer> listaDependencias;
-		
 	}
 	
 

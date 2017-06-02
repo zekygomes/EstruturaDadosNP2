@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Stack;
 
-
-
 public class Teste {
 
 	public static void main(String[] args) {
@@ -21,13 +19,12 @@ public class Teste {
 		dependencia1.add(3);
 		
 		
-		Queue <Tarefa> testando;
+		List <Tarefa> testando;
 		Tarefa um = new Tarefa(1, 2, dependencia1);
 		Tarefa dois = new Tarefa(1, 2, dependencia2);
 		Tarefa tres = new Tarefa(1, 2, dependencia3);
 		
-		testando.add(um);
-		
+		ordena(tarefas);
 		
 
 	}
