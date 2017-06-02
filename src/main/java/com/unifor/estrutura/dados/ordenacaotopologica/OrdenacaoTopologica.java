@@ -1,18 +1,11 @@
 package com.unifor.estrutura.dados.ordenacaotopologica;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
-import java.io.Reader;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
-import java.util.Stack;
-import java.util.stream.Stream;
 
 /** Trabalho da disciplina de Estrutura de Dados - Unifor - 2017.2
  * 	Professor: 
@@ -55,14 +48,14 @@ import java.util.stream.Stream;
  */
 public class OrdenacaoTopologica {
 
-	private static final String DELIMITADORES = "\\(|\\)";
+	//private static final String DELIMITADORES = "\\(|\\)";
 
 	public static void main(String[] args) throws IOException {
 		// recebe o arquivo via argumentos ou ler o arquivo padrão da sua pasta
-		InputStream input = args.length > 0 ? new FileInputStream(args[0])
-				: OrdenacaoTopologica.class.getResourceAsStream("entrada.in");
+		//InputStream input = args.length > 0 ? new FileInputStream(args[0])
+		//		: OrdenacaoTopologica.class.getResourceAsStream("entrada.in");
 		//processa(new java.io.InputStreamReader(input));
-		System.exit(0);
+		//System.exit(0);
 	}
 
 	/**
@@ -94,7 +87,7 @@ public class OrdenacaoTopologica {
 	 * Método que realiza a ordenação topológica.
 	 */
 	private static void ordena(Tarefa tarefa) {
-		Queue<Integer> fila = null;
+		Queue<Integer> fila = new LinkedList<Integer>();
 		List<Integer> resultado = new ArrayList<Integer>();
 		
 		for(Map.Entry<Integer,No> no : tarefa.tarefas.entrySet()){
@@ -103,14 +96,13 @@ public class OrdenacaoTopologica {
 				//Adiciona o valor na fila
 				fila.add(no.getValue().valor);
 				//Verficar os sucessores para decrementar dependências e apagar da lista, se houver
-				decrementarDependenciasEapagarDaLista(no.getValue().valor, tarefa);
+				decrementarDependenciasApagandoDaLista(no.getValue().valor, tarefa);
 				resultado.add(fila.poll());
 			}
 		}
 	}
 			
-	
-	private static void decrementarDependenciasEapagarDaLista(int valor, Tarefa tarefa){
+	private static void decrementarDependenciasApagandoDaLista(int valor, Tarefa tarefa){
 			//intera cada no da tarefa
 			for(Map.Entry<Integer,No> no : tarefa.tarefas.entrySet()){
 				//intera cada valor da Lista de Dependencias de cada no
@@ -143,7 +135,7 @@ public class OrdenacaoTopologica {
 
 	/**
 	 * Processa a saída
-	 */
+	
 	private static void saida() {
 		try (PrintWriter arquivo = new PrintWriter(
 				new FileWriter("saida.out", true))) {
@@ -157,6 +149,6 @@ public class OrdenacaoTopologica {
 			System.out.println("deu erro");
 		}
 	}
-	
+	 */
 
 }

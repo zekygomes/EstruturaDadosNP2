@@ -9,11 +9,21 @@ public class Tarefa{
 	//List<No> nos= new ArrayList<No>();
 	
 	Map<Integer,No> tarefas = new HashMap<Integer,No>();
-	
-	public Tarefa(ArrayList<No> nos){
+
+
+	public Tarefa(List<No> nos){
 		for(No no : nos){
 			this.tarefas.put(no.valor, no);
 		}
+	}
+	
+	
+	public Map<Integer, No> getTarefas() {
+		return tarefas;
+	}
+
+	public void setTarefas(Map<Integer, No> tarefas) {
+		this.tarefas = tarefas;
 	}
 	public static void main(String[] args) {
 		ArrayList <No> no = new ArrayList<No>();

@@ -3,8 +3,8 @@ package com.unifor.estrutura.dados.ordenacaotopologica;
 import java.util.List;
 
 public class No{
-		int valor;
-		int qtdDependencias;
+		Integer valor;
+		Integer qtdDependencias;
 		List<Integer> listaDependentes;
 		
 		
