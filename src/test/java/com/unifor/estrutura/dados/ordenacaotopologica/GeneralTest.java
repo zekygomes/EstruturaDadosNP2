@@ -32,15 +32,15 @@ public class GeneralTest {
 	public static void imprimeNos(List<Node> nos){
 		System.out.printf("Valor \t| QtdDepencias \t| ListaDependentes\n");
 		for(Node no : nos){
-			int tamanhoLista= no.listaDependentes.size();
+			int tamanhoLista= no.getListaDependentes().size();
 			if(tamanhoLista == 0){
 				tamanhoLista++;
 				for (int i = 0; i < tamanhoLista; i++) {
-					System.out.printf("%d \t| %d \t\t|  \n", no.valor, no.qtdDependencias);
+					System.out.printf("%d \t| %d \t\t|  \n", no.getValor(), no.getQtdDependencias());
 				}
 			}else{
 				for (int i = 0; i < tamanhoLista; i++) {
-					System.out.printf("%d \t| %d \t\t| %d \n", no.valor, no.qtdDependencias, no.listaDependentes.get(i));
+					System.out.printf("%d \t| %d \t\t| %d \n", no.getValor(), no.getQtdDependencias(), no.getListaDependentes().get(i));
 					
 				}
 			}

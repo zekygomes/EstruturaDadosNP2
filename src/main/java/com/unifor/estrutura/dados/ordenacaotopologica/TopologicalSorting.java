@@ -63,9 +63,9 @@ public class TopologicalSorting {
 		while (resultado.size() < tarefa.size()) {
 			while (Node.hasNext()) {
 				Map.Entry<Integer, Node> node = Node.next();
-				if (isDependenceEmpty(node.getValue().qtdDependencias)) {
+				if (isDependenceEmpty(node.getValue().getQtdDependencias())) {
 					// verfica se não há dependencias e Adiciona o valor na fila
-					fila.add(node.getValue().valor);
+					fila.add(node.getValue().getValor());
 					Node.remove();
 				}
 			}
@@ -73,10 +73,10 @@ public class TopologicalSorting {
 				Integer valor = fila.peek();
 				// Verficar os sucessores para decrementar dependências de todos
 				// na Lista de Dependentes
-				if (!isDependentsListEmpty(tarefa.getNode(valor).listaDependentes)) {
+				if (!isDependentsListEmpty(tarefa.getNode(valor).getListaDependentes())) {
 					decreaseDependenceFromDependentsList(valor, tarefa);
 					// e apagar a lista de dependentes
-					clearDependentsList(tarefa.getNode(valor).listaDependentes);
+					clearDependentsList(tarefa.getNode(valor).getListaDependentes());
 				}
 				// Adiciona o valor na lista
 				resultado.add(fila.poll());
@@ -87,10 +87,10 @@ public class TopologicalSorting {
 	}
 
 	private static void decreaseDependenceFromDependentsList(Integer valor, Tasks tarefa) {
-		for (Integer index : tarefa.tarefas.get(valor).listaDependentes) {
+		for (Integer index : tarefa.getTarefas().get(valor).getListaDependentes()) {
 			// Decrementa a qtd de dependencias dos nós encontrados na lista de
 			// dependentes(pelo keySet do Map)
-			tarefa.getNode(index).qtdDependencias--;
+			tarefa.getNode(index).decreaseDependence();
 		}
 	}
 
@@ -100,7 +100,7 @@ public class TopologicalSorting {
 
 	private static boolean isAllDependenciesEmpty(Tasks tarefa) {
 		for (Map.Entry<Integer, Node> node : tarefa.getEachNode()) {
-			if (!isDependenceEmpty(node.getValue().qtdDependencias)) {
+			if (!isDependenceEmpty(node.getValue().getQtdDependencias())) {
 				return false;
 			}
 		}
@@ -109,7 +109,7 @@ public class TopologicalSorting {
 
 	private static boolean isListComplete(Tasks tarefa) {
 		for (Map.Entry<Integer, Node> node : tarefa.getEachNode()) {
-			if (!isDependenceEmpty(node.getValue().qtdDependencias)) {
+			if (!isDependenceEmpty(node.getValue().getQtdDependencias())) {
 				return false;
 			}
 		}

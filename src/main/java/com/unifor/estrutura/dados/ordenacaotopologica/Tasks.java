@@ -9,7 +9,7 @@ import java.util.Set;
 public class Tasks{
 	//List<No> nos= new ArrayList<No>();
 	
-	Map<Integer,Node> tarefas = new HashMap<Integer,Node>();
+	private Map<Integer,Node> tarefas = new HashMap<Integer,Node>();
 	
 	public Tasks(){
 		
@@ -17,13 +17,12 @@ public class Tasks{
 
 	public Tasks(List<Node> nos){
 		for(Node no : nos){
-			this.tarefas.put(no.valor, no);
+			this.tarefas.put(no.getValor(), no);
 		}
 	}
 	
-	
 	public Map<Integer, Node> getTarefas() {
-		return tarefas;
+		return this.tarefas;
 	}
 
 	public void setTarefas(Map<Integer, Node> tarefas) {
@@ -42,7 +41,7 @@ public class Tasks{
 		Tasks tarefa = new Tasks(no);
 		
 		
-		System.out.println(tarefa.tarefas.get(2).qtdDependencias);
+		System.out.println(tarefa.tarefas.get(2).getQtdDependencias());
 	}
 	
 	public int size(){
@@ -57,7 +56,7 @@ public class Tasks{
 	public static Tasks clone(Tasks tarefa){
 		Tasks tarefa2 = new Tasks();
 		for (Node node: tarefa.tarefas.values()) {
-			tarefa2.tarefas.put(node.valor, node);
+			tarefa2.tarefas.put(node.getValor(), node);
 		}
 		return tarefa2;
 		
@@ -68,11 +67,13 @@ public class Tasks{
 	}
 	
 	public Integer getDependencies(Node no){
-		return no.qtdDependencias;
+		return no.getQtdDependencias();
 	}
 	
 	public Set<Map.Entry<Integer,Node>> getEachNode(){
 		return this.tarefas.entrySet();
 	}
+	
+	
 }
 	

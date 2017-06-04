@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Node{
-		Integer valor;
-		Integer qtdDependencias;
-		List<Integer> listaDependentes;
+		private Integer valor;
+		private Integer qtdDependencias;
+		private List<Integer> listaDependentes;
 		
 		public Node() {
 			
@@ -31,6 +31,34 @@ public class Node{
 			node2.listaDependentes = dependentsList;
 			return node2;
 			
+		}
+		
+		public void decreaseDependence(){
+			this.qtdDependencias--;
+		}
+		
+		public Integer getValor() {
+			return valor;
+		}
+
+		public void setValor(Integer valor) {
+			this.valor = valor;
+		}
+
+		public Integer getQtdDependencias() {
+			return qtdDependencias;
+		}
+
+		public void setQtdDependencias(Integer qtdDependencias) {
+			this.qtdDependencias = qtdDependencias;
+		}
+
+		public List<Integer> getListaDependentes() {
+			return listaDependentes;
+		}
+
+		public void setListaDependentes(List<Integer> listaDependentes) {
+			this.listaDependentes = listaDependentes;
 		}
 		
 		
