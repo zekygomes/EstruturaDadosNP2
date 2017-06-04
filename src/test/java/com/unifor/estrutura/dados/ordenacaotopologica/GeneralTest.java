@@ -24,7 +24,7 @@ public class GeneralTest {
 		
 		imprimeNos(nos);
 		System.out.println();
-		imprimeLista(TopologicalSorting.ordena(tarefa));	
+		imprimeLista(TopologicalSorting.topologicalSort(tarefa));	
 		
 
 	}

@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Queue;
 
 /** Trabalho da disciplina de Estrutura de Dados - Unifor - 2017.2
@@ -52,7 +51,7 @@ public class TopologicalSorting {
 	/**
 	 * Método que realiza a ordenação topológica.
 	 */
-	public static List<Integer> ordena(Tasks tarefa) {
+	public static List<Integer> topologicalSort(Tasks tarefa) {
 		Queue<Integer> fila = new LinkedList<Integer>();
 		List<Integer> resultado = new ArrayList<Integer>();
 		Tasks temporario = Tasks.clone(tarefa);
@@ -96,24 +95,6 @@ public class TopologicalSorting {
 
 	private static boolean isDependenceEmpty(Integer qtdDependencias) {
 		return qtdDependencias == 0;
-	}
-
-	private static boolean isAllDependenciesEmpty(Tasks tarefa) {
-		for (Map.Entry<Integer, Node> node : tarefa.getEachNode()) {
-			if (!isDependenceEmpty(node.getValue().getQtdDependencias())) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	private static boolean isListComplete(Tasks tarefa) {
-		for (Map.Entry<Integer, Node> node : tarefa.getEachNode()) {
-			if (!isDependenceEmpty(node.getValue().getQtdDependencias())) {
-				return false;
-			}
-		}
-		return true;
 	}
 
 	private static boolean isDependentsListEmpty(List<Integer> listaDependentes) {

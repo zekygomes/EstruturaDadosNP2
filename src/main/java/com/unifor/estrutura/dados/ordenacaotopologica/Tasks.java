@@ -25,9 +25,12 @@ public class Tasks{
 		return this.tarefas;
 	}
 
-	public void setTarefas(Map<Integer, Node> tarefas) {
-		this.tarefas = tarefas;
+	public void setTarefas(List<Node> nos) {
+		for(Node no : nos){
+			this.tarefas.put(no.getValor(), no);
+		}
 	}
+	
 	public static void main(String[] args) {
 		ArrayList <Node> no = new ArrayList<Node>();
 		
@@ -49,7 +52,6 @@ public class Tasks{
 	}
 	
 	public Node getNode(Integer Key){
-		
 		return this.tarefas.get(Key);
 	}
 	
@@ -60,6 +62,10 @@ public class Tasks{
 		}
 		return tarefa2;
 		
+	}
+	
+	public void addNode(Node no){
+		this.tarefas.put(no.getValor(), no);
 	}
 	
 	public void getDependentsList(){

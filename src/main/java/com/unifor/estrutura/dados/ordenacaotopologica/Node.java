@@ -9,7 +9,12 @@ public class Node{
 		private List<Integer> listaDependentes;
 		
 		public Node() {
-			
+		}
+		
+		public Node(int valor) {
+			this.valor=valor;
+			this.qtdDependencias = null;
+			this.listaDependentes = null;
 		}
 		
 		public Node(int valor, int qtdDependencias, List <Integer> listaDependentes) {
@@ -37,6 +42,10 @@ public class Node{
 			this.qtdDependencias--;
 		}
 		
+		public void increaseDependence(){
+			this.qtdDependencias = qtdDependencias + 1;
+		}
+		
 		public Integer getValor() {
 			return valor;
 		}
@@ -51,6 +60,10 @@ public class Node{
 
 		public void setQtdDependencias(Integer qtdDependencias) {
 			this.qtdDependencias = qtdDependencias;
+		}
+		
+		public void addOnListaDependentes(Integer item) {
+			this.listaDependentes.add(item);
 		}
 
 		public List<Integer> getListaDependentes() {
