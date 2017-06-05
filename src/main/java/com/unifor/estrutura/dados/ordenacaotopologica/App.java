@@ -27,9 +27,8 @@ public class App {
 
 	public static void main(String[] args) throws IOException {
 		// recebe o arquivo via argumentos ou ler o arquivo padrão da sua pasta
-		//InputStream input = args.length > 0 ? new FileInputStream("/ordenacaotopologica/entrada")
-		//: App.class.getResourceAsStream("entrada.in");
-		InputStream input = new FileInputStream("C:/Users/Ezequiel/Desktop/EstruturaDadosNP2/src/main/java/com/unifor/estrutura/dados/ordenacaotopologica/entrada");
+		InputStream input = args.length > 0 ? new FileInputStream(args[0])
+		: App.class.getResourceAsStream("entrada");
 		System.out.println(input.toString());
 		processa(new InputStreamReader(input));
 		
@@ -41,7 +40,7 @@ public class App {
 	 **/
 	private static void processa(Reader readerInput) {
 		List <Tasks> teste = entrada(readerInput);
-		System.out.println(ordena(teste));
+		//System.out.println(ordena(teste));
 		saida(ordena(teste));
 	}
 
@@ -98,9 +97,9 @@ public class App {
 	 **/
 	private static void saida(String resultado) {
 		try (PrintWriter arquivo = new PrintWriter(
-				new FileWriter("C:/Users/Ezequiel/Desktop/EstruturaDadosNP2/src/main/java/com/unifor/estrutura/dados/ordenacaotopologica/saida", true))) {
+				new FileWriter("src/main/java/com/unifor/estrutura/dados/ordenacaotopologica/saida", true))) {
 			
-				arquivo.append(resultado); //adiciona linha ao arquivo
+				arquivo.append(resultado.toString()); //adiciona linha ao arquivo
 				
 				//arquivo.printf("\r\n");   //quebra de linha
 			}
@@ -109,18 +108,3 @@ public class App {
 		}
 	}
 }
-/*
-String fileName = "C:/Users/Ezequiel/Desktop/EstruturaDadosNP2/src/main/java/com/unifor/estrutura/dados/ordenacaotopologica/saida";
-OutputStream os;
-try {
-	os = new FileOutputStream(fileName);
-} catch (FileNotFoundException e) {
-	// TODO Auto-generated catch block
-	e.printStackTrace();
-}
-OutputStreamWriter osw = new OutputStreamWriter(os);
-BufferedWriter bw = new BufferedWriter(osw);
-bw.write(resultado);
-
-bw.close();
-}*/

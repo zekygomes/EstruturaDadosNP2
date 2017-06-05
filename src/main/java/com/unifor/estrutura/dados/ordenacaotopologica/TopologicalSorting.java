@@ -49,15 +49,14 @@ public class TopologicalSorting {
 	/**
 	 * Método que realiza a ordenação topológica.
 	 */
-	public static List<Integer> topologicalSort(Tasks tarefa) {
+	public static List<Integer> topologicalSort(Tasks tarefas) {
 		Queue<Integer> fila = new Queue<Integer>();
 		List<Integer> resultado = new ArrayList<Integer>();
-		Tasks temporario = Tasks.clone(tarefa);
+		Tasks temporario = Tasks.clone(tarefas);
 		// intera cada linha(nó) da tarefa
 		Iterator<Map.Entry<Integer, Node>> Node = temporario.getEachNode().iterator();
 		
-		
-		while (resultado.size() < tarefa.size()) {
+		while (resultado.size() < tarefas.size()) {
 			while (Node.hasNext()) {
 				Map.Entry<Integer, Node> node = Node.next();
 				if (isDependenceEmpty(node.getValue().getQtdDependencias())) {
@@ -66,14 +65,15 @@ public class TopologicalSorting {
 					Node.remove();
 				}
 			}
+			
 			while (!fila.isEmpty()) {
 				Integer valor = fila.peek();
 				// Verficar os sucessores para decrementar dependências de todos
 				// na Lista de Dependentes
-				if (!isDependentsListEmpty(tarefa.getNode(valor).getListaDependentes())) {
-					decreaseDependenceFromDependentsList(valor, tarefa);
+				if (!isDependentsListEmpty(tarefas.getNode(valor).getListaDependentes())) {
+					decreaseDependenceFromDependentsList(valor, tarefas);
 					// e apagar a lista de dependentes
-					clearDependentsList(tarefa.getNode(valor).getListaDependentes());
+					clearDependentsList(tarefas.getNode(valor).getListaDependentes());
 				}
 				// Adiciona o valor na lista
 				resultado.add(fila.poll());
@@ -83,11 +83,11 @@ public class TopologicalSorting {
 		return resultado;
 	}
 
-	private static void decreaseDependenceFromDependentsList(Integer valor, Tasks tarefa) {
-		for (Integer index : tarefa.getTarefas().get(valor).getListaDependentes()) {
+	private static void decreaseDependenceFromDependentsList(Integer valor, Tasks tarefas) {
+		for (Integer index : tarefas.getTarefas().get(valor).getListaDependentes()) {
 			// Decrementa a qtd de dependencias dos nós encontrados na lista de
-			// dependentes(pelo keySet do Map)
-			tarefa.getNode(index).decreaseDependence();
+			// dependentes(pela chave do Map)
+			tarefas.getNode(index).decreaseDependence();
 		}
 	}
 

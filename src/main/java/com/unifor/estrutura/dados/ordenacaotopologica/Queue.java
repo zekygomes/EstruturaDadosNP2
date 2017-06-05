@@ -16,14 +16,12 @@ public class Queue<E> {
 		Integer retorno= null;
 		if(!this.fila.isEmpty()){
 			if(this.fila.get(0).getClass().equals(Integer.class) ){
-				int e = (int) this.fila.get(0);
-				retorno =e;
+				int temp = (int) this.fila.get(0);
+				retorno = temp;
 				this.fila.remove(0);
 				return (E) retorno;
 			}
-			
 		}
-		
 		return null;
 	}
 

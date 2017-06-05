@@ -25,10 +25,11 @@ public class Node{
 		
 		public Node clone(Node node){
 			Node node2 = new Node();
+			
 			int valor = node.valor;
 			int qtdDependecies = node.qtdDependencias;
-			List<Integer> dependentsList = new ArrayList<Integer>();
-			for(int lista: node.listaDependentes){
+			List<Integer> dependentsList = new ArrayList<Integer>();	
+			for(int lista : node.listaDependentes){
 				dependentsList.add(lista);
 			}
 			node2.valor =valor;
@@ -46,6 +47,10 @@ public class Node{
 			this.qtdDependencias = qtdDependencias + 1;
 		}
 		
+		public void addOnListaDependentes(Integer item) {
+			this.listaDependentes.add(item);
+		}
+		
 		public Integer getValor() {
 			return valor;
 		}
@@ -61,10 +66,6 @@ public class Node{
 		public void setQtdDependencias(Integer qtdDependencias) {
 			this.qtdDependencias = qtdDependencias;
 		}
-		
-		public void addOnListaDependentes(Integer item) {
-			this.listaDependentes.add(item);
-		}
 
 		public List<Integer> getListaDependentes() {
 			return listaDependentes;
@@ -73,6 +74,5 @@ public class Node{
 		public void setListaDependentes(List<Integer> listaDependentes) {
 			this.listaDependentes = listaDependentes;
 		}
-		
 		
 	}
