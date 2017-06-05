@@ -1,11 +1,16 @@
 package com.unifor.estrutura.dados.ordenacaotopologica;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.Reader;
 import java.util.ArrayList;
@@ -37,7 +42,7 @@ public class App {
 	private static void processa(Reader readerInput) {
 		List <Tasks> teste = entrada(readerInput);
 		System.out.println(ordena(teste));
-		saida();
+		saida(ordena(teste));
 	}
 
 	/**
@@ -91,12 +96,11 @@ public class App {
 	/**
 	 * Processa a saída
 	 **/
-	private static void saida() {
+	private static void saida(String resultado) {
 		try (PrintWriter arquivo = new PrintWriter(
-				new FileWriter("saida.out", true))) {
+				new FileWriter("C:/Users/Ezequiel/Desktop/EstruturaDadosNP2/src/main/java/com/unifor/estrutura/dados/ordenacaotopologica/saida", true))) {
 			
-
-				//arquivo.append(string) //adiciona linha ao arquivo
+				arquivo.append(resultado); //adiciona linha ao arquivo
 				
 				//arquivo.printf("\r\n");   //quebra de linha
 			}
@@ -105,3 +109,18 @@ public class App {
 		}
 	}
 }
+/*
+String fileName = "C:/Users/Ezequiel/Desktop/EstruturaDadosNP2/src/main/java/com/unifor/estrutura/dados/ordenacaotopologica/saida";
+OutputStream os;
+try {
+	os = new FileOutputStream(fileName);
+} catch (FileNotFoundException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+}
+OutputStreamWriter osw = new OutputStreamWriter(os);
+BufferedWriter bw = new BufferedWriter(osw);
+bw.write(resultado);
+
+bw.close();
+}*/

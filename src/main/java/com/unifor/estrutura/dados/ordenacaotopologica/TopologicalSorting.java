@@ -2,10 +2,8 @@ package com.unifor.estrutura.dados.ordenacaotopologica;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import com.unifor.estrutura.dados.ordenacaotopologica.Queue;
 
 /** Trabalho da disciplina de Estrutura de Dados - Unifor - 2017.2
  * 	Professor: 
@@ -63,12 +61,12 @@ public class TopologicalSorting {
 			while (Node.hasNext()) {
 				Map.Entry<Integer, Node> node = Node.next();
 				if (isDependenceEmpty(node.getValue().getQtdDependencias())) {
-					// verfica se não há dependencias e Adiciona o valor na fila
+					// verifica se não há dependencias e Adiciona o valor na fila
 					fila.add(node.getValue().getValor());
 					Node.remove();
 				}
 			}
-			while (fila.size() != 0) {
+			while (!fila.isEmpty()) {
 				Integer valor = fila.peek();
 				// Verficar os sucessores para decrementar dependências de todos
 				// na Lista de Dependentes
