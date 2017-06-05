@@ -22,9 +22,10 @@ public class App {
 
 	public static void main(String[] args) throws IOException {
 		// recebe o arquivo via argumentos ou ler o arquivo padrão da sua pasta
-		InputStream input = args.length > 0 ? new FileInputStream(args[0])
-		: App.class.getResourceAsStream("entrada.in");
-		
+		//InputStream input = args.length > 0 ? new FileInputStream("/ordenacaotopologica/entrada")
+		//: App.class.getResourceAsStream("entrada.in");
+		InputStream input = new FileInputStream("C:/EstruturaDados/ordenacaotopologica/src/main/java/com/unifor/estrutura/dados/ordenacaotopologica/entrada");
+		System.out.println(input.toString());
 		processa(new InputStreamReader(input));
 		
 		System.exit(0);
@@ -50,21 +51,20 @@ public class App {
 			linhas.forEach((linha) -> {
 				StringTokenizer token = new StringTokenizer(linha.replaceAll(" ", ""), DELIMITADORES);
 				Integer qtdNodes = Integer.parseInt(token.nextToken());
+				int tamanho =token.countTokens();
 				Tasks tarefa = new Tasks();
 				for (int i = 1; i <= qtdNodes; i++) {
 					tarefa.addNode(new Node(i));
 				}
-				for (int i = 0; i < token.countTokens(); i++) {
+				for (int i = 0; i < tamanho; i++) {
 					String[] dependencias = token.nextToken().split(",");
 					Integer denpendencia = Integer.parseInt(dependencias[0]);
 					Integer denpendente = Integer.parseInt(dependencias[1]);
 					
-					tarefa.getNode(denpendencia).increaseDependence();
+					tarefa.getNode(denpendente).increaseDependence();
 					tarefa.getNode(denpendencia).addOnListaDependentes(denpendente);
 				}
 				tarefas.add(tarefa);
-				//token.nextToken()   //pega o próximo token da linha
-				//token.countTokens()	//informa quantos tokens existem na linha
 			});
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -13,8 +13,8 @@ public class Node{
 		
 		public Node(int valor) {
 			this.valor=valor;
-			this.qtdDependencias = null;
-			this.listaDependentes = null;
+			this.qtdDependencias = 0;
+			this.listaDependentes = new ArrayList<Integer>();
 		}
 		
 		public Node(int valor, int qtdDependencias, List <Integer> listaDependentes) {
