@@ -24,7 +24,7 @@ public class App {
 		// recebe o arquivo via argumentos ou ler o arquivo padrão da sua pasta
 		//InputStream input = args.length > 0 ? new FileInputStream("/ordenacaotopologica/entrada")
 		//: App.class.getResourceAsStream("entrada.in");
-		InputStream input = new FileInputStream("C:/EstruturaDados/ordenacaotopologica/src/main/java/com/unifor/estrutura/dados/ordenacaotopologica/entrada");
+		InputStream input = new FileInputStream("C:/Users/Ezequiel/Desktop/EstruturaDadosNP2/src/main/java/com/unifor/estrutura/dados/ordenacaotopologica/entrada");
 		System.out.println(input.toString());
 		processa(new InputStreamReader(input));
 		

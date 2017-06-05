@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
+import com.unifor.estrutura.dados.ordenacaotopologica.Queue;
 
 /** Trabalho da disciplina de Estrutura de Dados - Unifor - 2017.2
  * 	Professor: 
@@ -52,7 +52,7 @@ public class TopologicalSorting {
 	 * Método que realiza a ordenação topológica.
 	 */
 	public static List<Integer> topologicalSort(Tasks tarefa) {
-		Queue<Integer> fila = new LinkedList<Integer>();
+		Queue<Integer> fila = new Queue<Integer>();
 		List<Integer> resultado = new ArrayList<Integer>();
 		Tasks temporario = Tasks.clone(tarefa);
 		// intera cada linha(nó) da tarefa
